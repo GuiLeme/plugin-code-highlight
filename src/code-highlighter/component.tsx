@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
 import hljs from 'highlight.js';
 import { CodeHighlighterProps } from './types';
-import './styles.css';
 import 'highlight.js/styles/a11y-light.css';
 
 const CODE_BLOCK_REGEX = /```\w+[\r\n\s]+([\s\S]*?)\n```/;
@@ -68,7 +67,6 @@ function CodeHighlighter({ pluginUuid: uuid }: CodeHighlighterProps): React.Reac
           const highlightedCode = hljs
             .highlight(pureTextCode, { language: messageFromGraphql.codeLanguage }).value;
           code.innerHTML = highlightedCode;
-
           codeTagItem.replaceWith(code);
         }
       });

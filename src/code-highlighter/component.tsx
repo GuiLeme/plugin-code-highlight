@@ -4,7 +4,7 @@ import { BbbPluginSdk, PluginApi } from 'bigbluebutton-html-plugin-sdk';
 import hljs from 'highlight.js';
 import { CodeHighlighterProps } from './types';
 import './styles.css';
-import 'highlight.js/styles/night-owl.css';
+import 'highlight.js/styles/a11y-light.css';
 
 const CODE_BLOCK_REGEX = /```\w+[\r\n\s]+([\s\S]*?)\n```/;
 const CODE_LANGUAGE_REGEX = /```\w+/;
@@ -58,17 +58,18 @@ function CodeHighlighter({ pluginUuid: uuid }: CodeHighlighterProps): React.Reac
       const codeHTMLTags = chatMessageDomElement.querySelectorAll('code');
 
       codeHTMLTags.forEach((codeTagItem) => {
-        if (!((codeTagItem.parentNode as HTMLElement).tagName === 'PRE')) {
-          const pre = document.createElement('pre');
+        const codeTagItemHasRendered = codeTagItem.getAttribute('code-highlight-rendered') === '1';
+        if (!codeTagItemHasRendered) {
           const code = document.createElement('code');
           code.classList.add('hljs');
           code.classList.add(messageFromGraphql.codeLanguage);
+          code.setAttribute('code-highlight-rendered', '1');
           const pureTextCode = codeTagItem.innerText;
           const highlightedCode = hljs
-            .highlight(messageFromGraphql.codeLanguage, pureTextCode).value;
+            .highlight(pureTextCode, { language: messageFromGraphql.codeLanguage }).value;
           code.innerHTML = highlightedCode;
-          pre.appendChild(code);
-          codeTagItem.replaceWith(pre);
+
+          codeTagItem.replaceWith(code);
         }
       });
       return true;

@@ -2,9 +2,27 @@
 
 ## What is it?
 
-The Code Highlighter Plugin serves as a chat tool for studenteds and users to demonstrate and compreehend code blocks in simpler, more visual ways.
+The Code Highlighter Plugin serves as a chat tool for students and users to demonstrate and visualize code blocks in simpler and more visual ways.
 
-![Gif of plugin demo](./public/assets/plugin.gif)
+In the following examples, we'll be using the code below:
+
+````md
+```java
+public static void main() {
+    int myInt = 123;
+}
+
+```
+````
+
+
+See how it looks for light theme:
+
+![plugin demo screenshot in light theme](./public/assets/plugin_demo_light.png)
+
+And for the dark theme:
+
+![plugin demo screenshot in dark theme](./public/assets/plugin_demo_dark.png)
 
 ## Building the Plugin
 
